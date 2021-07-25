@@ -24,3 +24,5 @@ hs_err_pid*
 .gitattributes
 .idea/workspace.xml
 Concurrency, Multithreading and Parallel Computing.iml
+.idea/vcs.xml
+.idea/uiDesigner.xml

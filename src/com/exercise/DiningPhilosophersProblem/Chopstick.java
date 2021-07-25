@@ -12,7 +12,7 @@ public class Chopstick {
     /**
      * Ctor.
      *
-     * @param id   Long value
+     * @param id   int value
      * @param lock Lock value
      */
     public Chopstick(final int id, final Lock lock) {
