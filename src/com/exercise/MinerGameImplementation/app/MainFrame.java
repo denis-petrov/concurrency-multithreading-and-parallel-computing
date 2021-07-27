@@ -1,5 +1,6 @@
 package com.exercise.MinerGameImplementation.app;
 
+
 import com.exercise.MinerGameImplementation.constants.Constants;
 import com.exercise.MinerGameImplementation.view.Board;
 import com.exercise.MinerGameImplementation.view.ButtonListener;
@@ -8,9 +9,8 @@ import com.exercise.MinerGameImplementation.workers.MineSweeper;
 import javafx.scene.control.ToolBar;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -18,19 +18,22 @@ import java.util.concurrent.TimeUnit;
 public class MainFrame extends JFrame implements ButtonListener {
 
     public static final long serialVersionUID = 1L;
-    private ToolBar toolBar;
-    private Board board;
+    private final ToolBar toolBar;
+    private final Board board;
     private ExecutorService layersExecutor;
     private ExecutorService sweepersExecutor;
-    private List<MineLayer> mineLayers = new ArrayList<MineLayer>();
-    private List<MineSweeper> mineSweepers = new ArrayList<MineSweeper>();
+    private ArrayList<MineLayer> mineLayers = new ArrayList<MineLayer>();
+    private ArrayList<MineSweeper> mineSweepers = new ArrayList<MineSweeper>();
 
 
     public MainFrame() {
         super(Constants.APP_NAME);
 
-        add(new ToolBar(), BorderLayout.NORTH);
-        add(new Board(), BorderLayout.CENTER);
+        toolBar = new ToolBar();
+        board = new Board();
+
+        add(toolBar, BorderLayout.NORTH);
+        add(board, BorderLayout.CENTER);
 
         setSize(Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
         setVisible(true);
