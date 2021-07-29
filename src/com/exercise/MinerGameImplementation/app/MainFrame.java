@@ -32,8 +32,8 @@ public class MainFrame extends JFrame implements ButtonListener {
         toolBar = new ToolBar();
         board = new Board();
 
-        add(toolBar, BorderLayout.NORTH);
-        add(board, BorderLayout.CENTER);
+        /*add(toolBar, BorderLayout.NORTH);
+        add(board, BorderLayout.CENTER);*/
 
         setSize(Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
         setVisible(true);
