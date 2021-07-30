@@ -10,12 +10,9 @@ public class App {
         Random random = new Random();
 
         List<Integer> data = new ArrayList<>();
-
-        IntStream.range(0, 30)
+        IntStream.range(0, 10)
                 .forEach(i -> data.add(i, random.nextInt()));
 
-        MergeSort mergeSort = new MergeSort(data);
-        mergeSort.run(0, data.size() - 1);
-        mergeSort.print();
+        System.out.println(data);
     }
 }
