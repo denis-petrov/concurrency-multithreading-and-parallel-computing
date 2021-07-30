@@ -1,115 +1,50 @@
 package com.exercise.ParallelAlgorithms.MergeSort;
 
+
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public final class MergeSort {
 
-    public static <T> void sort(List<T> data, Comparator<T> comparator) {
-        if (data.isEmpty()) throw new IllegalArgumentException("Input data is null.");
-        if (data.size() < 2) return;
+    public static <T extends Comparable<? super T>> void sort(List<T> array, int start, int end) {
+        if (start < end) {
+            int middle = (start + end) / 2;
 
-        int median = data.size() / 2;
-        int leftSize = median;
-        int rightSize = data.size() - median;
-
-        List<T> left = new ArrayList<>();
-        IntStream.range(0, leftSize)
-                .forEach(l -> left.add(l, data.get(l)));
-
-        List<T> right = new ArrayList<>();
-        IntStream.range(0, rightSize)
-                .forEach(r -> right.add(r, data.get(leftSize + r)));
-
-        sort(left, comparator);
-        sort(right, comparator);
-
-        merge(data, left, right, comparator);
+            sort(array, start, middle);
+            sort(array, middle + 1, end);
+            merge(array, start, middle, end);
+        }
     }
 
-    private static <T> void merge(List<T> data, List<T> left, List<T> right, Comparator<T> comparator) {
-        int leftIndex = 0;
-        int rightIndex = 0;
-        int sortedIndex = 0;
+    public static <T extends Comparable<? super T>> void merge(List<T> array, int start, int middle, int end) {
+        List<T> leftArray = new ArrayList<>();
+        IntStream.range(0, middle - start + 1)
+                .forEach(i -> leftArray.add(i, array.get(start + i)));
 
-        while (leftIndex < left.size() && rightIndex < right.size()) {
-            if (comparator.compare(left.get(leftIndex), right.get(rightIndex)) <= 0) {
-                data.add(sortedIndex, left.get(leftIndex));
+        List<T> rightArray = new ArrayList<>();
+        IntStream.range(0, end - middle)
+                .forEach(i -> rightArray.add(i, array.get(middle + 1 + i)));
+
+
+        int leftIndex = 0, rightIndex = 0;
+        int currentIndex = start;
+        while (leftIndex < leftArray.size() && rightIndex < rightArray.size()) {
+            if (leftArray.get(leftIndex).compareTo(rightArray.get(rightIndex)) <= 0) {
+                array.add(currentIndex, leftArray.get(leftIndex));
                 leftIndex++;
             } else {
-                data.add(sortedIndex, right.get(rightIndex));
+                array.add(currentIndex, rightArray.get(rightIndex));
                 rightIndex++;
             }
-            sortedIndex++;
+            currentIndex++;
         }
 
-        while (leftIndex < left.size()) {
-            data.add(sortedIndex, left.get(leftIndex));
-            leftIndex++;
-            sortedIndex++;
-        }
+        while (leftIndex < leftArray.size())
+            array.add(currentIndex++, leftArray.get(leftIndex++));
 
-        while (rightIndex < right.size()) {
-            data.add(sortedIndex, right.get(rightIndex));
-            rightIndex++;
-            sortedIndex++;
-        }
-    }
-   /*
-    public void run(int low, int high) {
-        if (low >= high)
-            return;
-
-        int middle = (low + high) / 2;
-
-        run(low, middle);
-        run(middle + 1, high);
-        merge(low, middle, high);
+        while (rightIndex < rightArray.size())
+            array.add(currentIndex++, rightArray.get(rightIndex++));
     }
 
-    public void print() {
-        for (T datum : data) {
-            System.out.println(datum.toString() + " ");
-        }
-    }
-
-    public boolean isSorted() {
-        return IntStream.range(0, data.size())
-                .noneMatch(i -> data.get(i).compareTo(data.get(i + 1)) > 0);
-    }
-
-    private void merge(int low, int middle, int high) {
-        for (int index = low; index <= high; index++) {
-            tempData.add(index, data.get(index));
-        }
-
-        int lhsIndex = low;
-        int rhsIndex = middle + 1;
-        int resIndex = high;
-
-        while ((lhsIndex <= middle) && (resIndex <= high)) {
-            if (tempData.get(lhsIndex).compareTo(tempData.get(rhsIndex)) < 0) {
-                data.add(resIndex, tempData.get(lhsIndex));
-                lhsIndex++;
-            } else {
-                data.add(resIndex, tempData.get(rhsIndex));
-                rhsIndex++;
-            }
-            resIndex++;
-        }
-
-        while (lhsIndex <= middle) {
-            data.add(resIndex, tempData.get(lhsIndex));
-            resIndex++;
-            lhsIndex++;
-        }
-
-        while (rhsIndex <= high) {
-            data.add(resIndex, tempData.get(rhsIndex));
-            resIndex++;
-            rhsIndex++;
-        }
-    }*/
 }
