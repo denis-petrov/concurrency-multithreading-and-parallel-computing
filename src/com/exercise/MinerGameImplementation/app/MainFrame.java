@@ -32,9 +32,6 @@ public class MainFrame extends JFrame implements ButtonListener {
         toolBar = new ToolBar();
         board = new Board();
 
-        /*add(toolBar, BorderLayout.NORTH);
-        add(board, BorderLayout.CENTER);*/
-
         setSize(Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

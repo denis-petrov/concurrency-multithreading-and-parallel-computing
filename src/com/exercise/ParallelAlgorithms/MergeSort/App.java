@@ -1,7 +1,6 @@
 package com.exercise.ParallelAlgorithms.MergeSort;
 
-import java.util.Random;
-import java.util.stream.IntStream;
+import com.exercise.ParallelAlgorithms.DataUtil;
 
 public class App {
 
@@ -11,7 +10,7 @@ public class App {
         System.out.println("Number of threads/cores: " + numOfThreads);
         System.out.println("");
 
-        Integer[] dataForParallelSort = generateRandomArray(10000000);
+        Integer[] dataForParallelSort = DataUtil.generateRandomIntegerArray(10000000);
         Integer[] dataForSequentialSort = new Integer[dataForParallelSort.length];
         System.arraycopy(dataForParallelSort, 0, dataForSequentialSort, 0, dataForParallelSort.length);
 
@@ -31,11 +30,4 @@ public class App {
 
     }
 
-    public static Integer[] generateRandomArray(int size) {
-        Random random = new Random(size);
-        return IntStream.generate(() -> random.nextInt(size))
-                .limit(size)
-                .boxed()
-                .toArray(Integer[]::new);
-    }
 }
