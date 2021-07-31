@@ -2,7 +2,7 @@ package com.exercise.ParallelAlgorithms.MergeSort;
 
 import java.util.stream.IntStream;
 
-public final class MergeSort {
+public class SequentialMergeSort {
 
     public static <T extends Comparable<? super T>> void sort(T[] array, int start, int end) {
         if (start < end) {
