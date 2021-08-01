@@ -1,4 +1,4 @@
-package com.exercise.ParallelAlgorithms;
+package com.exercise.Utils;
 
 import java.util.Random;
 import java.util.stream.IntStream;

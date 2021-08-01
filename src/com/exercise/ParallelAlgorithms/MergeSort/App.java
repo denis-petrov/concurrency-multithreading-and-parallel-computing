@@ -1,6 +1,6 @@
 package com.exercise.ParallelAlgorithms.MergeSort;
 
-import com.exercise.ParallelAlgorithms.DataUtil;
+import com.exercise.Utils.DataUtil;
 
 public class App {
 
